@@ -1,0 +1,242 @@
+{% include 'header.html' %}
+<div class="col-lg-10 mt-3">
+ <div class="main-content">
+     <script>
+        function showMeasurements() {
+              var garmentType = document.getElementById("garment_type").value;
+              // document.getElementById("shirt_measurement").style.display = (garmentType === "Topwear") ? "block" : "none";
+              // document.getElementById("pant_measurements").style.display = (garmentType === "Bottomwear") ? "block" : "none";
+              document.getElementById("both_measurements").style.display = (garmentType === "Top-Bottom") ? "block" : "none";
+
+        }
+      </script>
+      <div class="" style="font-size: 30px; font-family: 'Times New Roman', Times, serif;"> Add Order</div>
+        <hr>
+        <form  method="POST" action="{% url 'add_order' %}" enctype="multipart/form-data">
+         {% csrf_token %}
+         <div class="row g-3">
+            <div class="col-md-6">
+           <label for="order_name" class="form-label">Order Name:</label>
+           <input type="text" id="order_name" name="order_name" class="form-control" required><br>
+            </div>
+            <div class="col-md-6">
+            <label for="customer_name" class="form-label">Customer Name:</label>
+             <select  name="customer" class="form-select" required>
+              <option>select</option>
+              {% for a in customerbt %}
+               <option value="{{a.customer_name}}">{{a.customer_name}}</option>
+              {% endfor %}
+             </select><br>
+            </div>
+            <div class="col-md-6">
+            <label for="order_name" class="form-label">Order Date:</label>
+            <input type="date"  name="order_date" class="form-control" required><br>
+            </div>
+            <div class="col-md-6">
+            <label for="order_name" class="form-label">Deliver Date:</label>
+            <input type="date"  name="deliver_date" class="form-control" required><br>
+            </div>
+            <div class="col-md-6">
+                <label for="order_name" class="form-label">Priority:</label>
+                <input type="text"  name="priority" class="form-control" required><br>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Quantity:</label>
+                <input type="text"  name="quantity" class="form-control" required><br>
+            </div>
+            <div class="col-md-4">
+                <label for="order_name" class="form-label">Total Payment:</label>
+                <input type="text"  name="Total_payment" class="form-control" required><br>
+            </div>
+            <div class="col-md-4">
+                <label for="order_name" class="form-label">Advance Payment:</label>
+                <input type="text"  name="Advance_Payment" class="form-control" required><br>
+            </div>
+            
+            <div class="col-md-4">    
+                <label for="order_name" class="form-label">Description:</label>
+                {% comment %} <input type="text" name="description" class="form-control" required><br> {% endcomment %}
+                <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+            </div>
+            <div class="col-md-12">
+              <label for="order_name" class="form-label">Image:</label>
+              <input  type="file" name="product_img" class="form-control" required><br>
+            </div>
+          
+          <div class="mb-3">
+              <label for="garment_type" class="form-label">Garment Type:</label>
+            <select id="garment_type" name="garment_type" class="form-select" onchange="showMeasurements()" required>
+            <option value="">Select</option>      
+            <!-- <option value="Topwear">Topwear</option>
+            <option value="Bottomwear">Bottomwear</option> -->
+            <option value="Top-Bottom">Top-Bottom</option>
+
+            </select><br>
+          </div><br>
+          </div>
+           <div id="shirt_measurement" style="display:none;">
+            <h3>शर्ट का नाप</h3>
+            <div class="row g-3">
+               <div class="col-md-6">
+                <label for="neck_size" class="form-label">गर्दन:</label>
+                <input type="text"  name="neck_size" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                <label for="chest_size" class="form-label">छाती:</label>
+                <input type="text"  name="chest_size" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                 <label for="sleeve_length" class="form-label">आस्तीन:</label>
+                 <input type="text"  name="sleeve_length" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                   <label for="sleeve_length" class="form-label">लंबाई:</label>
+                   <input type="text"  name="shirt_length" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                   <label for="sleeve_length" class="form-label">पेट:</label>
+                   <input type="text"  name="stomach" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                   <label for="sleeve_length" class="form-label">हीप:</label>
+                   <input type="text"  name="heap" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                   <label for="sleeve_length" class="form-label">कंधा:</label>
+                   <input type="text"  name="shoulder" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                <label for="remark_shirt" class="form-label">अतिरिक्त:</label>
+                <input type="text" name="remark_shirt" class="form-control"><br>
+               </div>
+            </div>
+           </div>
+
+          <div id="pant_measurements" style="display:none;">
+            <h3>पेंट का नाप</h3>
+            <div class="row g-3">
+               <div class="col-md-6">
+             <label for="waist_size" class="form-label">कमर:</label>
+             <input type="text"  name="waist_size"  class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+              <label for="length_size" class="form-label">लंबाई:</label>
+              <input type="text"  name="length_size"  class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                <label for="length_size" class="form-label">हीप:</label>
+                <input type="text"  name="pant_heap" class="form-control" ><br>
+               </div>
+               <div class="col-md-6">
+                <label for="length_size" class="form-label">हीप लूज़:</label>
+                <input type="text"  name="heap_loosing" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                <label for="length_size" class="form-label">मोहरी:</label>
+                <input type="text"  name="mohri" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                <label for="length_size" class="form-label">जांघ:</label>
+                <input type="text"  name="thai" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                <label for="length_size" class="form-label">घुटना:</label>
+                <input type="text"  name="Knee_Size" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                <label for="length_size" class="form-label">लंगोट:</label>
+                <input type="text"  name="langot" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                <label for="length_size" class="form-label">पिंडली:</label>
+                <input type="text"  name="pindli" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                <label for="length_size" class="form-label">अतिरिक्त:</label>
+                <input type="text"  name="remark" class="form-control"><br>
+               </div>
+            </div>
+          </div>
+          <div id="both_measurements" style="display:none;">
+            <h3>शर्ट का नाप</h3>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="neck_size"class="form-label">गर्दन:</label>
+                <input type="text"  name="neck_size"class="form-control"><br>
+              </div>
+              <div class="col-md-6">
+                <label for="chest_size"class="form-label">छाती:</label>
+                <input type="text"  name="chest_size"class="form-control"><br>
+              </div>
+              <div class="col-md-6">
+                 <label for="sleeve_length"class="form-label">आस्तीन:</label>
+                 <input type="text"  name="sleeve_length"class="form-control"><br>
+              </div>
+              <div class="col-md-6">
+                   <label for="shirt_length"class="form-label">लंबाई:</label>
+                   <input type="text"  name="shirt_length"class="form-control"><br>
+              </div>
+              <div class="col-md-6">
+                   <label for="sleeve_length"class="form-label">पेट:</label>
+                   <input type="text"  name="stomach"class="form-control"><br>
+              </div>
+              <div class="col-md-6">
+                   <label for="sleeve_length"class="form-label">हीप:</label>
+                   <input type="text"  name="heap"class="form-control"><br>
+              </div>
+              <div class="col-md-6">
+                   <label for="sleeve_length"class="form-label">कंधा:</label>
+                   <input type="text"  name="shoulder"class="form-control"><br>
+              </div>
+               <h3>पेंट का नाप</h3>
+               <div class="col-md-6">
+                <label for="waist_size">कमर:</label>
+                <input type="text"  name="waist_size" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                 <label for="length_size"class="form-label">लंबाई:</label>
+                 <input type="text"  name="length_size"class="form-control" ><br>
+               </div>
+               <div class="col-md-6">
+                   <label for="length_size"class="form-label">हीप:</label>
+                   <input type="text"  name="pant_heap" class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                   <label for="length_size"class="form-label">हीप लूज़:</label>
+                   <input type="text"  name="heap_loosing"class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                   <label for="length_size"class="form-label">मोहरी:</label>
+                   <input type="text"  name="mohri"class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                   <label for="length_size"class="form-label">जांघ:</label>
+                   <input type="text"  name="thai"class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                   <label for="length_size"class="form-label">घुटना:</label>
+                   <input type="text"  name="Knee_Size"class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                   <label for="length_size"class="form-label">लंगोट:</label>
+                   <input type="text"  name="langot"class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                   <label for="length_size"class="form-label">पिंडली:</label>
+                   <input type="text"  name="pindli"class="form-control"><br>
+               </div>
+               <div class="col-md-6">
+                   <label for="length_size"class="form-label">अतिरिक्त:</label>
+                   <input type="text"  name="remark" class="form-control"><br>
+               </div>
+            </div>
+          </div><br>
+          
+            <input type="submit" class="btn btn-outline-dark" value="Submit">
+        </form>
+
+
+     
+  </div>
+</div>

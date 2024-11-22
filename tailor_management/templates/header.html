@@ -1,0 +1,90 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Adamina' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+  </head>
+  <body>
+    <!-- navbar start -->
+    <nav class="navbar" >
+        <div class="container-fluid">
+          <!-- offcanvas start -->
+          <button class="btn btn-dark mb-2 d-lg-none " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fa-solid fa-bars-staggered" style=" color: aliceblue;"></i></button>
+  
+          <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">FORWARD TAILORS</h5>
+              <button type="button" style="background-color: white;" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body" style="background-color: #2D353C;">
+            <div class="quiz-menu">
+                    <ul style="margin-top: -29px; ">
+                      <a href="/dashboard"><li>Dashborad</li></a>
+                      <a href="/addcustomerfn"><li>Add Customer</li></a>
+                      <a href="/customer"><li>Customers</li></a>
+                      <a href="/add_order"><li>Add-order</li></a>
+                      <a href="/orders"><li>Orders</li></a>
+                      <a href="/expenses"><li>Expenses</li></a>
+                      <a href="/revenue"><li>Revenue</li></a>
+                      <a href="/"><li>Log Out</li></a>
+
+                    </ul>
+            </div>
+            </div>
+          </div>
+          <!-- offcanvas end -->
+          <a class="navbar-brand mb-2" style=" font-weight: 600;" href="dashboard.html">Forward Tailor</a>
+          <ul class="navbar-nav d-flex flex-row ">
+            <li class="nav-item">
+                <a class="nav-link pe-4" href="#">
+                  <div class="input-group" >
+                    <input type="text" class="form-control" placeholder="Search..." style="height: 30px; border-radius: 30px; border-color: black; margin-top: -2px;">
+                    <div class="input-group-append">
+                      <!-- <button class="btn btn-secondary" type="button" >
+                        <i class="fa fa-search"></i>
+                      </button> -->
+                    </div>
+                  </div>
+                </a>
+            </li>
+            <li class="nav-item pe-3">
+                <a class="nav-link" href="#">
+                </a>
+            </li>
+            <li class="nav-item pe-">
+              <a class="nav-link profilelogo" href="#" >
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- navbar end -->
+
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 quiz-sidebar-col">
+                <div class="quiz-sidebar pt-2 ">
+                    <ul>
+                      <a href="/dashboard"><li>Dashboard</li></a>
+                      <a href="/addcustomerfn"><li>Add Customer</li></a>
+                      <a href="/customer"><li>Customers</li></a>
+                      <a href="/add_order"><li>Add-order</li></a>
+                      <a href="/orders"><li>Orders</li></a>
+                      <a href="/expenses"><li>Expenses</li></a>
+                      <a href="/revenue"><li>Revenue</li></a>
+                      <a href="/"><li>Log Out</li></a>
+
+                  </ul>
+                </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>

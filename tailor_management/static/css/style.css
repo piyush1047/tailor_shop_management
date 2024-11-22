@@ -1,0 +1,214 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Adamina';
+}
+
+body{
+    background-color:#ECF0F4 !important;
+}
+.main-content{
+    margin-top: 70px;
+    /* margin-left: 0px; */
+}
+.datacard{
+    -webkit-box-shadow: 7px 7px 22px -4px rgba(0,0,0,0.49);
+    -moz-box-shadow: 7px 7px 22px -4px rgba(0,0,0,0.49);
+    box-shadow: 7px 7px 22px -4px rgba(0,0,0,0.49);
+    border-radius: 15px;
+    background-color:#FFFFFF ;
+    width: 100% ;
+    height: 100%;
+
+}
+.navbar{
+    background-color:#FFFFFF;
+    height: 60px;
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    z-index: 80;
+
+}
+
+.quiz-sidebar{
+    background-color: #2D353C;
+    position: fixed;
+    width: 210px;
+    height: 100vh;
+    overflow-x: hidden;
+    top: 0;
+    left: 0;
+    /* width: 220px; */
+    color:white !important;
+
+}
+.quiz-sidebar li{
+    list-style: none;
+    text-decoration: none;
+    /* font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+    font-size: 18px;
+    font-weight: 500;
+    padding-top: 60px;
+}
+.quiz-sidebar a:hover{
+    /* color: rgb(72, 115, 199); */
+    color: #66D7EE;
+}
+.quiz-sidebar a{
+    text-decoration: none;
+    list-style: none;
+    color:white;
+}
+
+.button{
+    margin-top: 140px;
+    margin-left: -17px;
+    width: 100%;
+}
+.quiz-admin-profile{
+    color: rgb(51, 51, 51);
+    margin-left: 45px;
+}
+.quiz-menu li{
+    list-style: none;
+    text-decoration: none;
+    /* font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+    font-size: 18px;
+    font-weight: 500;
+    padding-top: 40px;
+    color:#FFFFFF;
+
+}
+.quiz-menu li:hover{
+    color: burlywood;
+}
+
+
+.res-button{
+    margin-top:70px;
+    width: 70%;
+}
+.quiz-menu a{
+    text-decoration: none;
+    list-style: none;
+}
+.main-content{
+    margin-left: 0px;
+    margin-top: 70px;
+}
+
+
+#offcanvasWithBothOptions{
+    background-color: #DEE2E6;
+    width: 40% !important;
+}
+
+.profileoffcanavas{
+    margin: auto;
+    width: 30%;
+    height: 300px !important;
+}
+@media (max-width: 575.98px) {
+    .quiz-sidebar-col{
+        display: none !important;
+    }
+   
+    .quiz-admin-profile{
+        margin-left: 14px !important;
+    }
+    #offcanvasWithBothOptions{
+        background-color: #FFFFFF;
+    }
+
+    
+ }
+
+  @media (max-width: 767.98px) {
+    .quiz-sidebar-col{
+        display: none !important;
+    }
+    .button{
+        margin-top:30px ;
+        width: 100%;
+    }
+    .emp-info-dashboard{
+        text-align: center;
+    }
+    .emp-photo-dashboard{
+       text-align: center;
+    }
+   
+    .profileoffcanavas{
+    margin: auto;
+    width: 98% !important;
+    
+    }
+
+    .right-side{
+    margin-left: 0px !important;
+    margin-top: 0px !important;
+    
+    }
+}
+
+  @media (max-width: 991.98px) { 
+    .quiz-sidebar-col{
+        display: none;
+    }
+      
+    .profileoffcanavas{
+        margin: auto;
+        width: 50%;
+        height: 350px !important;
+    }
+    
+    .right-side{
+        margin-left: 0px !important;
+        margin-top: 0px !important;
+        /* line-height: 60px; */
+    }
+   
+}
+    @media (max-width: 1199.98px) { 
+        .main-content{
+            margin-left: 50px;
+        } 
+     }
+.b-1{
+    /* border: 2px solid black; */
+    border-radius: 5px;
+    background-color: hsl(210, 14%, 85%);
+    height: 100px;
+    width: 270px;
+    margin-left:50px;
+    box-shadow: 6px 9px 2px black;
+
+    }
+  @media(min-width:768px) and (max-width:992px){
+    .b-1{
+      margin-left: 10px;
+    }
+    .b-2{
+        margin-left: 10px;
+      }
+   }
+   @media(min-width:576px) and (max-width:768px){
+    .b-1{  
+        margin-left: 0px;
+    }
+    .b-2{  
+        margin-left: 0px;
+    }
+}
+.b-2{
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: hsl(210, 14%, 85%);
+    width:550px !important;
+    height: 100px;
+    margin-left: 50px;
+    box-shadow: 6px 9px 2px black;
+    }

@@ -1,0 +1,38 @@
+{% include 'header.html' %}
+
+            <!-- (Main Content)right side code start  -->
+            <div class="col-lg-10">
+                <div class=" main-content">
+                    <!-- Bootstrap Form Example -->
+                    <form method="post" action="{% url 'addcustomerfn' %}">
+                        {% csrf_token %}
+                     <div class="container">
+                        <div class="" style="font-size: 30px; font-family: 'Times New Roman', Times, serif;">
+                            Add Customer
+                        </div>
+                        <hr>
+                    
+                        <!-- Customer Name -->
+                        <div class="form-group mb-3">
+                            <label for="customerName">Customer Name:</label>
+                            <input type="text" class="form-control" name="customer_name" placeholder="Enter your name">
+                        </div>
+                    
+                        <!-- Mobile Number -->
+                        <div class="form-group mb-3">
+                            <label for="mobileNumber">Mobile Number:</label>
+                            <input type="tel" class="form-control" name="customer_contact" placeholder="Enter your mobile number">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="mobileNumber">Address:</label>
+                            {% comment %} <input type="text" class="form-control" name="customer_email" placeholder="Enter your mobile number"> {% endcomment %}
+                            <textarea class="form-control" name="customer_address" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+                        </div>
+                        <input type="submit" class="btn btn-outline-dark" value="Submit">
+                     </div>
+                    </form>
+                    
+                        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  

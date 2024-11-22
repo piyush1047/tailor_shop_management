@@ -1,0 +1,442 @@
+{% include 'header.html' %}
+<style>
+  @media print {
+    body * {
+        visibility: hidden; /* Hide everything */
+    }
+    .printableArea, .printableArea * {
+        visibility: visible; /* Show only the printable area */
+    }
+    .printableArea {
+        position: absolute;
+        left:80px;
+        top:50px;
+    }
+    .shop-name {
+      font-size: 35px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+   }
+   /* Hide shop name in web view */
+        .shop-name {
+            display: none; /* Hide in web view */
+        }
+        * Hide the table in web view */
+        .printableArea {
+            display: none; /* Hide in web view */
+        }
+  }
+</style>
+
+<div class="col-lg-10 mt-3">
+  <div class=" main-content">
+    <script>
+      function showMeasurements() {
+            var garmentType = document.getElementById("garment_type").value;
+            // document.getElementById("shirt_measurement").style.display = (garmentType === "Topwear") ? "block" : "none";
+            // document.getElementById("pant_measurements").style.display = (garmentType === "Bottomwear") ? "block" : "none";
+            document.getElementById("both_measurements").style.display = (garmentType === "Top-Bottom") ? "block" : "none";
+
+      }
+    </script>
+    <div class="" style="font-size: 30px; font-family: 'Times New Roman', Times, serif;">Order List</div>
+    <div class="hstack gap-3">
+       <div class="p-2"><div class="input-group">
+          <input type="text" class="form-control" placeholder="Search...">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="button">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+       </div>
+       <div class="p-2 ms-auto"></div>
+      <div class="p-2"><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal-mg2">Download</button></div>
+      <div class="p-2"><button type="button" class="btn btn-outline-dark"onclick="printTable()" class="btn btn-primary mb-3">Print</button></div>
+
+    </div>
+    {% if messages %}
+      <ul class="messages" style="color:green;font-size:50;">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    
+        {% comment %} table {% endcomment %}
+     <table class="table table-bordered text-center">
+          <thead class="table-primary">
+            <tr style="font-size: 15px;">
+                <th>Order Name</th>
+                <th>Customer Name</th>
+                <th>Description</th>
+                <th>Order Date</th>
+                <th>Deliver Date</th>
+                <th>Priority</th>
+                <th>Total Payment</th>
+                <th>Advance Payment</th>
+                <th>Due Payment</th>
+                <th>Quantity</th>
+                <th>Image</th>
+                <th>Garment Type</th>
+                <th>Measurements</th>
+                <th>Action</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in orderdata %}
+              <tr>
+                <td>{{ order.order_name }}</td>
+                <td>{{ order.customer }}</td>
+                <td>{{ order.description }}</td>
+                <td>{{ order.order_date }}</td>
+                <td>{{ order.deliver_date }}</td>
+                <td>{{ order.priority }}</td>
+                <td>{{ order.Total_payment }}</td>
+                <td>{{ order.Advance_Payment }}</td>
+                <td>{{ order.due_payment }}</td>
+                <td>{{ order.quantity }}</td>
+                <td >{% if order.product_img != Null %}<img src="/media/{{order.product_img}}" heigh="80px"width="80px">{% endif %}</td>
+
+                <td>{{ order.get_garment_type_display }}</td>
+                <td>
+                    {% if order.garment_type == 'Topwear' %}
+                        गर्दन: {{ order.neck_size }}<br>
+                        छाती: {{ order.chest_size }}<br>
+                        आस्तीन: {{ order.sleeve_length }}<br>
+                        लंबाई: {{ order.shirt_length }}<br>
+                        पेट: {{ order.stomach }}<br>
+                        हीप: {{ order.heap }}<br>
+                        कंधा: {{ order.shoulder }}<br>
+                        अतिरिक्त: {{ order.remark_shirt }}<br>
+
+                    {% elif order.garment_type == 'Bottomwear' %}
+                        कमर: {{ order.waist_size }}<br>
+                        लंबाई: {{ order.length_size }}<br>
+                        हीप: {{ order.pant_heap }}<br>
+                        हीप लूज़: {{ order.heap_loosing }}<br>                        
+                        मोहरी: {{ order.mohri }}<br>
+                        जांघ: {{ order.thai }}<br>
+                        घुटना: {{ order.Knee_Size }}<br>
+                        लंगोट: {{ order.langot }}<br>
+                        पिंडली: {{ order.pindli }}<br>
+                        अतिरिक्त: {{ order.remark }}<br>
+
+                    {% elif order.garment_type == 'Top-Bottom' %}
+                        <h6>Top</h6>
+                        गर्दन: {{ order.neck_size }}<br>
+                        छाती: {{ order.chest_size }}<br>
+                        आस्तीन: {{ order.sleeve_length }}
+                        लंबाई: {{ order.shirt_length }}
+                        पेट: {{ order.stomach }}
+                        हीप: {{ order.heap }}
+                        कंधा: {{ order.shoulder }}<br>
+                        <h6>Bottom</h6>
+                        कमर: {{ order.waist_size }}
+                        लंबाई: {{ order.length_size }}
+                        हीप: {{ order.pant_heap }}
+                        हीप लूज़: {{ order.heap_loosing }}                        
+                        मोहरी: {{ order.mohri }}
+                        जांघ: {{ order.thai }}
+                        घुटना: {{ order.Knee_Size }}
+                        लंगोट: {{ order.langot }}
+                        पिंडली: {{ order.pindli }}
+                        अतिरिक्त: {{ order.remark }}
+
+                    {% endif %}
+                </td>
+                <td ><i class='btn btn-dark fas fa-edit' style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal3-{{forloop.counter}}" data-bs-whatever="@getbootstrap"><a href="#exampleModal3-{{forloop.counter}}"></a></i>
+                  <a  href="/ordersdelete/{{order.id}}" onclick="return confirmDelete('{{ a.name }}')"><button  class="btn btn-dark mt-2"  id="del"><i class="fa-solid  fa-trash"></i></button></a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+     </table>
+
+
+
+     {% comment %} print area {% endcomment %}
+    <div class="printableArea" style="display: none;"> <!-- Initially hidden -->
+       <div class="shop-name" style="display: block;">Forward Tailor</div> <!-- Visible in print -->
+        <table class="table table-striped table-bordered" id="printable-table" style="display: table;">  
+        <thead class="table-primary">
+         <tr>
+          <th>Order Name</th>
+          <th>Customer Name</th>
+          <th>Description</th>
+          <th>Order Date</th>
+          <th>Deliver Date</th>
+          <th>Priority</th>
+          <th>Total Payment</th>
+          <th>Advance Payment</th>
+          <th>Due Payment</th>
+          <th>Quantity</th>
+          <th>Garment Type</th>
+          <th>Measurements</th>
+
+         </tr>
+        </thead>
+       <tbody>
+        {% for order in orderdata %}
+        <tr>
+          <td>{{ order.order_name }}</td>
+          <td>{{ order.customer }}</td>
+          <td>{{ order.description }}</td>
+          <td>{{ order.order_date }}</td>
+          <td>{{ order.deliver_date }}</td>
+          <td>{{ order.priority }}</td>
+          <td>{{ order.Total_payment }}</td>
+          <td>{{ order.Advance_Payment }}</td>
+          <td>{{ order.due_payment }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.get_garment_type_display }}</td>
+          <td>
+              {% if order.garment_type == 'Topwear' %}
+                  गर्दन: {{ order.neck_size }}<br>
+                  छाती: {{ order.chest_size }}<br>
+                  आस्तीन: {{ order.sleeve_length }}<br>
+                  लंबाई: {{ order.shirt_length }}<br>
+                  पेट: {{ order.stomach }}<br>
+                  हीप: {{ order.heap }}<br>
+                  कंधा: {{ order.shoulder }}<br>
+                  अतिरिक्त: {{ order.remark_shirt }}<br>
+
+              {% elif order.garment_type == 'Bottomwear' %}
+                  कमर: {{ order.waist_size }}<br>
+                  लंबाई: {{ order.length_size }}<br>
+                  हीप: {{ order.pant_heap }}<br>
+                  हीप लूज़: {{ order.heap_loosing }}<br>                        
+                  मोहरी: {{ order.mohri }}<br>
+                  जांघ: {{ order.thai }}<br>
+                  घुटना: {{ order.Knee_Size }}<br>
+                  लंगोट: {{ order.langot }}<br>
+                  पिंडली: {{ order.pindli }}<br>
+                  अतिरिक्त: {{ order.remark }}<br>
+
+              {% elif order.garment_type == 'Top-Bottom' %}
+                  गर्दन: {{ order.neck_size }}<br>
+                  छाती: {{ order.chest_size }}<br>
+                  आस्तीन: {{ order.sleeve_length }}
+                  लंबाई: {{ order.shirt_length }}
+                  पेट: {{ order.stomach }}
+                  हीप: {{ order.heap }}
+                  कंधा: {{ order.shoulder }}
+                  कमर: {{ order.waist_size }}
+                  लंबाई: {{ order.length_size }}
+                  हीप: {{ order.pant_heap }}
+                  हीप लूज़: {{ order.heap_loosing }}                        
+                  मोहरी: {{ order.mohri }}
+                  जांघ: {{ order.thai }}
+                  घुटना: {{ order.Knee_Size }}
+                  लंगोट: {{ order.langot }}
+                  पिंडली: {{ order.pindli }}
+                  अतिरिक्त: {{ order.remark }}
+
+              {% endif %}
+          </td>
+          
+
+          
+        </tr>
+       {% endfor %}
+       </tbody>
+        </table>
+    </div> 
+    {% comment %} edit model {% endcomment %}
+    {% for order in orderdata %}
+    <div class="modal fade" id="exampleModal3-{{forloop.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit customer</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action="{% url 'Updateorder' order.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <label for="order_name" class="form-label">Order Name:</label>
+                        <input type="text" id="order_name" name="order_name" value="{{order.order_name}}" class="form-control" required><br>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="customer_name" class="form-label">Customer Name:</label>
+                        <input type="text"  name="customer" value="{{order.customer}}" class="form-control" required><br>
+
+                      </div>
+                      <div class="col-md-6">
+                        <label for="order_name" class="form-label">Order Date:</label>
+                        <input type="date"  name="order_date" value="{{order.order_date}}" class="form-control" required><br>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="order_name" class="form-label">Deliver Date:</label>
+                        <input type="date"  name="deliver_date" value="{{order.deliver_date}}" class="form-control" required><br>
+                      </div>
+                      <div class="col-md-6">
+                          <label for="order_name" class="form-label">Priority:</label>
+                          <input type="text"  name="priority" value="{{order.priority}}" class="form-control" required><br>
+                      </div>
+                      <div class="col-md-6">
+                          <label class="form-label">Quantity:</label>
+                          <input type="text"  name="quantity" value="{{order.quantity}}" class="form-control" required><br>
+                      </div>
+                      <div class="col-md-4">
+                          <label for="order_name" class="form-label">Total Payment:</label>
+                          <input type="text"  name="Total_payment" value="{{order.Total_payment}}" class="form-control" required><br>
+                      </div>
+                      <div class="col-md-4">
+                          <label for="order_name" class="form-label">Advance Payment:</label>
+                          <input type="text"  name="Advance_Payment" value="{{order.Advance_Payment}}" class="form-control" required><br>
+                      </div>
+                      <div class="col-md-4">
+                          <label for="order_name" class="form-label">Due Payment:</label>
+                          <input type="text" name="due_payment" value="{{order.due_payment}}"class="form-control" required><br>
+                      </div>
+                      <div class="col-md-12">
+                          <label for="order_name" class="form-label">Description:</label>
+                          <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{{order.description}}</textarea>
+
+                      </div>
+                      <div class="col-md-12">
+                        <label for="order_name" class="form-label">Image:</label>
+                        <input type="file" name="product_img" value="{{order.product_img}}" class="form-control" required><br>
+                      </div>
+                      
+                      <div class="mb-3">
+                          <label for="garment_type" class="form-label">Garment Type:</label>
+                          <input type="text" name="garment_type" value="{{order.garment_type}}"class="form-control" required><br>
+
+                      </div><br>
+                      
+                        <h3>शर्ट का नाप</h3>
+                        <div class="row g-3">
+                        <div class="col-md-6">
+                        <label for="neck_size" class="form-label">गर्दन:</label>
+                        <input type="text"  name="neck_size" value="{{order.neck_size}}" class="form-control"><br>
+                        </div>
+                        <div class="col-md-6">
+                        <label for="chest_size" class="form-label">छाती:</label>
+                        <input type="text"  name="chest_size" value="{{order.chest_size}}" class="form-control"><br>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="sleeve_length" class="form-label">आस्तीन:</label>
+                          <input type="text"  name="sleeve_length" value="{{order.sleeve_length}}" class="form-control"><br>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="sleeve_length" class="form-label">लंबाई:</label>
+                            <input type="text"  name="shirt_length"value="{{order.shirt_length}}" class="form-control"><br>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="sleeve_length" class="form-label">पेट:</label>
+                            <input type="text"  name="stomach" value="{{order.stomach}}" class="form-control"><br>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="sleeve_length" class="form-label">हीप:</label>
+                            <input type="text"  name="heap" value="{{order.heap}}" class="form-control"><br>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="sleeve_length" class="form-label">कंधा:</label>
+                            <input type="text"  name="shoulder" value="{{order.shoulder}}" class="form-control"><br>
+                        </div>
+                        </div>
+                        <h3>पेंट का नाप</h3>
+                        <div class="row g-3">
+                          <div class="col-md-6">
+                          <label for="waist_size" class="form-label">कमर:</label>
+                          <input type="text"  name="waist_size" value="{{order.waist_size}}"  class="form-control"><br>
+                          </div>
+                          <div class="col-md-6">
+                            <label for="length_size" class="form-label">लंबाई:</label>
+                            <input type="text"  name="length_size" value="{{order.length_size}}"  class="form-control"><br>
+                          </div>
+                          <div class="col-md-6">
+                          <label for="length_size" class="form-label">हीप:</label>
+                          <input type="text"  name="pant_heap" value="{{order.pant_heap}}" class="form-control" ><br>
+                          </div>
+                          <div class="col-md-6">
+                          <label for="length_size" class="form-label">हीप लूज़:</label>
+                          <input type="text"  name="heap_loosing" value="{{order.heap_loosing}}" class="form-control"><br>
+                          </div>
+                          <div class="col-md-6">
+                          <label for="length_size" class="form-label">मोहरी:</label>
+                          <input type="text"  name="mohri" value="{{order.mohri}}" class="form-control"><br>
+                          </div>
+                          <div class="col-md-6">
+                          <label for="length_size" class="form-label">जांघ:</label>
+                          <input type="text"  name="thai" value="{{order.thai}}" class="form-control"><br>
+                          </div>
+                          <div class="col-md-6">
+                          <label for="length_size" class="form-label">घुटना:</label>
+                          <input type="text"  name="Knee_Size" value="{{order.Knee_Size}}" class="form-control"><br>
+                          </div>
+                          <div class="col-md-6">
+                          <label for="length_size" class="form-label">लंगोट:</label>
+                          <input type="text"  name="langot" value="{{order.langot}}" class="form-control"><br>
+                          </div>
+                          <div class="col-md-6">
+                          <label for="length_size" class="form-label">पिंडली:</label>
+                          <input type="text"  name="pindli" value="{{order.pindi}}" class="form-control"><br>
+                          </div>
+                          <div class="col-md-6">
+                          <label for="length_size" class="form-label">अतिरिक्त:</label>
+                          <input type="text"  name="remark" value="{{order.remark}}" class="form-control"><br>
+                          </div>
+                        </div><br>
+                    </div>  
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                  <input type="submit" value="Update" class="btn btn-success">
+              </form>
+            </div>    
+          </div>         
+      </div>
+    </div>
+    {% endfor %}
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        {% comment %} for delete  {% endcomment %}
+        <script>
+            function confirmDelete(name){
+                     return confirm(`you want to delete ${name}?`);
+                     }
+        </script>
+          
+        {% comment %} for print  {% endcomment %}
+        <script>
+          function printTable() {
+              // Show the printable area before printing
+              document.querySelector('.printableArea').style.display = 'block'; // Show the printable area
+              window.print(); // Trigger the print dialog
+              document.querySelector('.printableArea').style.display = 'none'; // Hide it again after printing
+          }
+        </script>
+        
+            
+      {% comment %} download file model {% endcomment %}
+      <div class="modal fade" id="exampleModal-mg2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Download file</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="{% url 'export_order' %}" method="get">
+                <label for="income-category">Download File as</label>
+
+                <select name="format" class="form-select">
+                    <option value="xlsx">Excel</option>
+                    <option value="csv">CSV</option>
+                    <option value="json">JSON</option>
+                </select><br>
+                <button type="submit" class="btn btn-dark">Download</button>
+              </form>
+            
+            </div>   
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>
